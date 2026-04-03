@@ -1,0 +1,94 @@
+[gd_scene load_steps=13 format=3 uid="uid://c4ya4fynrja23"]
+
+[ext_resource type="Script" uid="uid://2kd7uh3n3we7" path="res://world.gd" id="1_i3pqv"]
+[ext_resource type="Script" uid="uid://c7cfjymwv6c4d" path="res://mc.gd" id="2_hqtel"]
+[ext_resource type="Texture2D" uid="uid://jrufxmje2xbk" path="res://spritesheet1.png" id="3_sweqy"]
+[ext_resource type="Shape2D" uid="uid://rhvu4rq0ydkg" path="res://playercollision shape.tres" id="4_hqtel"]
+[ext_resource type="Script" uid="uid://bppikgmh1xtfx" path="res://playeranimation.gd" id="4_sweqy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqk2v"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(0, 0, 729, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_036b0"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(2208, 0, 668, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioo17"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(2944, 0, 668, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwbse"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(0, 0, 730, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkg7o"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(715, 0, 647, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbfbk"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(1344, 0, 604, 1080)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ioo17"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqk2v")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_036b0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioo17")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwbse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkg7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbfbk")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_i3pqv")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(126, 533)
+scale = Vector2(1.245, 1.245)
+collision_mask = 2
+script = ExtResource("2_hqtel")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Player"]
+texture_filter = 1
+position = Vector2(-19.277105, -4.819259)
+scale = Vector2(0.12, 0.12)
+sprite_frames = SubResource("SpriteFrames_ioo17")
+animation = &"jump"
+script = ExtResource("4_sweqy")
+
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="area collision shape" type="CollisionShape2D" parent="Player/Area2D"]
+position = Vector2(-13.654619, -0.8032131)
+shape = ExtResource("4_hqtel")
+
+[node name="bodycollisionshape" type="CollisionShape2D" parent="Player"]
+position = Vector2(-13.654619, -0.8032129)
+shape = ExtResource("4_hqtel")

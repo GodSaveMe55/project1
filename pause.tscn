@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://y81r5lk1oxef"]
+
+[ext_resource type="Script" uid="uid://cjvwitrq7gvdq" path="res://world 4.gd" id="1_45vjg"]
+
+[node name="pause" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_45vjg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -21.0
+offset_top = -10.0
+offset_right = 1303.0
+offset_bottom = 739.0
+
+[node name="resume" type="Button" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 507.0
+offset_right = 478.0
+offset_bottom = 560.0
+text = "Resume"
+
+[node name="home" type="Button" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = 809.0
+offset_top = 504.0
+offset_right = 1047.0
+offset_bottom = 557.0
+text = "Homescreen"
+
+[connection signal="pressed" from="resume" to="." method="_on_resume_pressed"]

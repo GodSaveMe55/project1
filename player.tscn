@@ -1,0 +1,150 @@
+[gd_scene load_steps=16 format=3 uid="uid://c4ya4fynrja23"]
+
+[ext_resource type="Script" uid="uid://c7cfjymwv6c4d" path="res://mc.gd" id="2_hqtel"]
+[ext_resource type="Texture2D" uid="uid://jrufxmje2xbk" path="res://spritesheet1.png" id="3_sweqy"]
+[ext_resource type="Shape2D" uid="uid://rhvu4rq0ydkg" path="res://playercollision shape.tres" id="4_hqtel"]
+[ext_resource type="Script" uid="uid://bppikgmh1xtfx" path="res://playeranimation.gd" id="4_sweqy"]
+[ext_resource type="PackedScene" uid="uid://cdh5chfgk3xvg" path="res://score.tscn" id="5_sweqy"]
+[ext_resource type="PackedScene" uid="uid://y81r5lk1oxef" path="res://pause.tscn" id="6_2hs0m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(6325, 5, 670, 1075)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(5626, 5, 676, 1075)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqk2v"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(0, 0, 729, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_036b0"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(2208, 0, 668, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioo17"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(2944, 0, 668, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwbse"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(0, 0, 730, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(756, 5, 546, 1075)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbfbk"]
+atlas = ExtResource("3_sweqy")
+region = Rect2(1344, 0, 604, 1080)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ioo17"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtel")
+}],
+"loop": true,
+"name": &"damage",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqk2v")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_036b0")
+}, {
+"duration": 2.25,
+"texture": SubResource("AtlasTexture_ioo17")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwbse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbfbk")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(126, 533)
+scale = Vector2(1.245, 1.245)
+collision_mask = 22
+script = ExtResource("2_hqtel")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-19.277105, -4.819259)
+scale = Vector2(0.12, 0.12)
+sprite_frames = SubResource("SpriteFrames_ioo17")
+animation = &"damage"
+script = ExtResource("4_sweqy")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+
+[node name="area collision shape" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-5.62249, -11.244981)
+shape = ExtResource("4_hqtel")
+
+[node name="bodycollisionshape" type="CollisionShape2D" parent="."]
+position = Vector2(-2.409639, -3.2128515)
+shape = ExtResource("4_hqtel")
+
+[node name="Camera2D2" type="Camera2D" parent="."]
+scale = Vector2(0.5, 0.5)
+ignore_rotation = false
+zoom = Vector2(2.16, 2.16)
+limit_left = 3
+limit_top = 172
+limit_bottom = 620
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_horizontal_offset = -1.0
+drag_vertical_offset = -0.33
+drag_top_margin = 0.0
+drag_bottom_margin = 0.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" parent="CanvasLayer" instance=ExtResource("5_sweqy")]
+offset_left = 37.0
+offset_top = 38.0
+offset_right = 245.0
+offset_bottom = 65.0
+
+[node name="pause" parent="CanvasLayer" instance=ExtResource("6_2hs0m")]
+visible = false
+offset_left = -6.0
+offset_top = -8.0
+offset_right = -6.0
+offset_bottom = -8.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

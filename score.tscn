@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdh5chfgk3xvg"]
+
+[ext_resource type="Script" uid="uid://bdmu1fcgnpssf" path="res://healthscore.gd" id="1_jm6bp"]
+[ext_resource type="Script" uid="uid://rbe4ovonh1pe" path="res://score.gd" id="1_t1x8i"]
+[ext_resource type="Texture2D" uid="uid://cyhn6xww75pbl" path="res://1000002552.png" id="2_i4m08"]
+[ext_resource type="Texture2D" uid="uid://br1vvh6du7pwb" path="res://1000002551.png" id="3_jm6bp"]
+[ext_resource type="Texture2D" uid="uid://dgycfle1aob5w" path="res://1000002550.png" id="4_2paxd"]
+[ext_resource type="Texture2D" uid="uid://rcsx5a1h2dbo" path="res://1000002549.png" id="5_a6oh8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u8ybf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i4m08")
+}],
+"loop": true,
+"name": &"0heart",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jm6bp")
+}],
+"loop": true,
+"name": &"1heart",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2paxd")
+}],
+"loop": true,
+"name": &"2hearts",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_a6oh8")
+}],
+"loop": true,
+"name": &"3hearts",
+"speed": 5.0
+}]
+
+[node name="ProgressBar" type="ProgressBar"]
+offset_left = 25.0
+offset_top = 33.0
+offset_right = 233.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+max_value = 8.0
+show_percentage = false
+
+[node name="Node2D" type="StaticBody2D" parent="."]
+script = ExtResource("1_jm6bp")
+
+[node name="score" type="RichTextLabel" parent="Node2D"]
+offset_left = 4.0
+offset_top = -21.0
+offset_right = 179.0
+offset_bottom = 4.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "OCs Rescued:"
+script = ExtResource("1_t1x8i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
+position = Vector2(50, 43)
+scale = Vector2(0.04665044, 0.04574074)
+sprite_frames = SubResource("SpriteFrames_u8ybf")
+animation = &"3hearts"
